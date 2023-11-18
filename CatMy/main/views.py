@@ -11,3 +11,6 @@ def list(request):
 
 def account(request):
     return render(request, 'main/account.html')
+
+def news2(request):
+    return render(request, 'main/news2.html')

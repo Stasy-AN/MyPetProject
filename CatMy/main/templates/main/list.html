@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> {{title}} </title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <script src="https://kit.fontawesome.com/a97047fead.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
-<body>
 
+<body>
+{% include 'main/sidebar.html' %}
+<div class="container">
+    <div class="row">
+        <h1> Все новости  </h1>
+        <hr>
+            <a href="/news2/" class="nav-link">
+                <h3> Наташа! Мы все уронили!</h3>
+            </a>
+            <a href="/news/" class="nav-link">
+                <h3> Скандал на рыбном рынке.</h3>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

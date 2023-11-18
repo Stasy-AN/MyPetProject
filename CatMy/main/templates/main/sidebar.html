@@ -1,26 +1,59 @@
-<!DOCTYPE html>
-{% load static %}
 {% load bootstrap5 %}
+{% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title> {{title}} </title>
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3" style="background-color:#7700FF">
-                <h1> Боковое меню </h1>
-            </div>
-            <div class="col-md-9">
-                <h1> Содержание </h1>
-                <br>
-                <p> Информация </p>
-            </div>
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+<script src="https://kit.fontawesome.com/a97047fead.js" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+<style>
+    aside {
+    background-image: url({% static 'main/img/Фон.png' %});
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .one {
+    background: #290033;
+    }
+</style>
+<aside>
+    <div class="one">
+        <div class="d-flex flex-column flex-shrink-0 p-3">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+              <img class="bi me-3" src="{% static 'main' %}/img/1.png"  height="10">
+              <span class="fs-1"> CatNews </span>
+            </a>
+            <h7> Главные новости котовселенной </h7>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li>
+                <a href="/" class="nav-link text-white">
+                    <i class="fa fa-paw"></i>   Главная
+                </a>
+              </li>
+              <li>
+                <a href="/list/" class="nav-link text-white">
+                    <i class="fa fa-paw"></i>   Все новости
+                </a>
+              </li>
+              <li>
+                <a href="/account/" class="nav-link text-white">
+                    <i class="fa fa-paw"></i>   Аккаунт пользователя
+                </a>
+              </li>
+            </ul>
+            <hr>
+        </div>
+        <div>
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" placeholder="Поиск">
+                </div>
+                <button type="submit" class="btn btn-light mx-sm-3 mb-2"> Найти </button>
+                <hr>
+            </form>
         </div>
     </div>
-</body>
-</html>
+
+</aside>

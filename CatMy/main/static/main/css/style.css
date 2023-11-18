@@ -1,0 +1,98 @@
+body{
+    color:#000000;
+    background: #290033;
+}
+aside{  /* стиль боковой панели навигации */
+    float: left; /* позиция - слева */
+    background: #290033;/* цвет фона*/
+    width: 25%; /*ширина в % от экрана, можно указать в px */
+    padding: 1%; /*отступы */
+    height: 100vh; /* высота боковой панели - 100% от видимой высоты экрана*/
+    color: #8A2BE2; /* цвет текста */
+    border-right: 5px solid #290033; /* стиль границы панели */
+}
+a{
+    color:#8A2BE2;
+}
+
+aside img{
+    width: auto;
+    height: 50px;
+    float: left;
+    border-radius:5%;
+}
+
+span.logo{
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    position:relative;
+    top: -5px;
+}
+
+aside ul li:hover, aside ul li a:hover{
+    color: #f0b3ff;
+    background-color: #f0b3ff;
+    border-radius:3px;
+    transform: scale(0.975);
+    transition: 0.15s;
+}
+
+body .content{
+    float: left;
+    color: black;
+    margin-top: 25px;
+    text-align: center;
+    width: 75%;
+}
+
+.alert-info{
+    float:left;
+    clear:both;
+    width:500px;
+    margin: 10px 26%;
+    text-align:center;
+}
+
+h1 {
+    color:#290033;
+}
+
+ fieldset.field {
+ border: 1px solid #290033;
+ width: 100%;
+ background: #8A2BE2;
+ padding: 3px
+ }
+
+ fieldset.field legend {
+ background: #290033;
+ padding: 6px;
+ font-weight: bold;
+ color: #FFFFFF
+ }
+
+ fieldset.field label {
+ color: #FFFFFF
+ }
+
+ fieldset.field input {
+ font-weight: normal;
+ color: #222222
+ }
+
+img{
+    width: auto;
+    height: 300px;
+}
+
+.img_wrapper {
+    height: 80vh;
+    width: 100%;
+    position: relative;
+}
+.img_wrapper  img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}

@@ -7,20 +7,31 @@
 <head>
     <meta charset="UTF-8">
     <title> {{title}} </title>
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <script src="https://kit.fontawesome.com/a97047fead.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
+
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3" style="background-color:#7700FF">
-                <h1> Боковое меню </h1>
-            </div>
-            <div class="col-md-9">
-                <h1> Содержание </h1>
-                <br>
-                <p> Информация </p>
-            </div>
+{% include 'main/sidebar.html' %}
+<div class="container" >
+    <div class="row">
+        <h1> CatNews - все самое интересное из мира котиков </h1>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h2> Главная котоновость этой недели:  </h2>
+            <br>
+            <a href="/news/" class="nav-link">
+                <h3> Скандал на рыбном рынке.</h3>
+            </a>
+            <img src="{% static 'main' %}/img/Рыбов.jpeg" width="70%">
         </div>
     </div>
+</div>
 </body>
 </html>
