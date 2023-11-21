@@ -14,3 +14,9 @@ def account(request):
 
 def news2(request):
     return render(request, 'main/news2.html')
+
+def contakt(request):
+    return render(request, 'main/contakt.html')
+
+def cats(request):
+    return render(request, 'main/cats.html')

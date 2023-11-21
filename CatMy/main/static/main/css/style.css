@@ -90,9 +90,10 @@ img{
     height: 80vh;
     width: 100%;
     position: relative;
+
 }
 .img_wrapper  img {
     object-fit: contain;
     height: 100%;
     width: 100%;
-}
+ }
