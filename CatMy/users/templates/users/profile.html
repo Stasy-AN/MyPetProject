@@ -1,0 +1,78 @@
+{% extends 'main/base_template.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ request.user.username }} - профиль{% endblock %}
+{% block sidebar %} {% include 'users/user_panel.html' %} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="text-center" style="margin-top:30px;">
+        <h2>Профиль пользователя {{ request.user.username }}</h2>
+        <br>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media">
+                        <img class="img-fluid" src="{{ request.user.account.account_image.url }}" alt="{{ request.user.username }}">
+                        <div class="media-body">
+                            <h5 class="mt-0"> {{ request.user.username }} </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0"> Имя </h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ request.user.username }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0"> Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ request.user.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0"> Телефон</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ request.user.account.phone }}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0"> Адрес</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                                {{ request.user.account.address }}
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="text-center">
+                        <a class="btn btn-outline-primary" style="margin-bottom:15px;"
+                           href="{% url 'profile_update' %}">Edit</a>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
@@ -20,3 +21,10 @@ def contakt(request):
 
 def cats(request):
     return render(request, 'main/cats.html')
+
+def custom_404(request, exception):
+    #return render(request, 'main/sidebar.html')
+    return HttpResponse('Котики работают над этим: {exception}')
+
+def sidebar(request):
+    return render(request,'main/sidebar.html')
