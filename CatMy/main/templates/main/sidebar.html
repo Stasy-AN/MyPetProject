@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{% url 'news_list' %}" {% if request.resolver_match.view_name  == 'news_list' %} class="link-active" aria-current="page" {% endif %}>
+                    <a href="{% url 'news' %}" {% if request.resolver_match.view_name  == 'news' %} class="link-active" aria-current="page" {% endif %}>
                     <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Все новости</div>
                     </a>
                 </li>
@@ -81,9 +81,8 @@
                 <li class="nav-item">
                     <a href="{% url 'login' %}" {% if request.resolver_match.view_name  == 'login' %}
                     class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block">
-                        <i class="ffa fa-paw {% if request.path  == '/users/login' %} link-active {% endif %}" ></i>
-                         Вход</div>
+                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>
+                        <i class="{% if request.path  == '/users/login' %} link-active {% endif %}"></i> Вход </div>
                     </a>
                 </li>
             </ul>
@@ -96,11 +95,12 @@
                 </div>
                 {% endfor %}
             {% endif %}
+        <hr>
 
         <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
         <input type="text" class="form-control border-0" placeholder="Поиск">
         <div class="input-group-append">
-            <button class="input-group-text bg-primary text-dark border-0 px-3"><i class="fa fa-paw"></i></button>
+            <button class="btn btn-primary"><i class="fa fa-paw"></i></button>
         </div>
         </div>
     </div>
