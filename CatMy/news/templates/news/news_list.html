@@ -57,12 +57,12 @@
     <div class="row">
         {% for article in articles %}
             <div class="single_news">
-            <div class="p-4 p-md-5 text-muted">
+            <div class="p-4 p-md-5">
                 <div class="row">
                     <div class="col-md-{% if article.image_set.all %}6{% else %}12 {% endif %} px-0">
                         <h1 class="display-4 fst-italic"> {{ article.title }}</h1>
                         <p class="lead my-3">{{ article.anouncement }}</p>
-                        <p class="lead mb-0"><a href="{% url 'news_detail' article.pk %}" class="text-white fw-bold">Полный текст...
+                        <p class="lead mb-0"><a href="{% url 'news_detail' article.pk %}" class="fw-bold text-dark">Открыть новость
                         </a>
                         </p>
                     </div>
