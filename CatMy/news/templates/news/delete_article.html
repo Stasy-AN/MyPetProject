@@ -7,10 +7,10 @@
 {% block content %}
         <div class="row">
             <div class="text-center" style="margin-top:30px;">
-            <h1 >Удалить {{ article.title }}?</h1>
+            <h1 >Удалить статью: {{ article.title }}?</h1>
             <form method="post" class="contact_form">
                 {% csrf_token %}
-                <a class="btn btn-warning" href="{% url 'news' %}">Отмена</a>
+                <a class="btn btn-warning" href="{% url 'news' %}"> Отмена </a>
                 <input type="submit" class="btn btn-danger" value = "Удалить">
             </form>
             </div>

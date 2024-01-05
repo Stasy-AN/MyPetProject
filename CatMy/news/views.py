@@ -1,10 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
-from .models import *
 from django.db import connection, reset_queries
 from django.views.generic import DetailView, DeleteView, UpdateView
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .models import *
 #человек не аутентифицирован - отправляем на страницу другую
 
 import json
@@ -24,8 +24,8 @@ def search_auto(request):
 
 
 
-
-class ArticleDetailView(DetailView):
+from .utils import ViewCountMixin
+class ArticleDetailView(ViewCountMixin, DetailView):
     model = Article
     template_name = 'news/news_detail.html'
     context_object_name = 'article'
@@ -50,7 +50,6 @@ class ArticleUpdateView(UpdateView):
         return context
 
     def post(self, request, **kwargs):
-        request.POST = request.POST
         current_object = Article.objects.get(id=request.POST['image_set-0-article'])
         deleted_ids = []
         for i in range(int(request.POST['image_set-TOTAL_FORMS'])): #удаление всех по галочкам
@@ -84,9 +83,10 @@ class ArticleUpdateView(UpdateView):
 
 class ArticleDeleteView(DeleteView):
     model = Article
-    success_url = reverse_lazy('news_index') #именованная ссылка или абсолютную
+    success_url = reverse_lazy('news') #именованная ссылка или абсолютную
     template_name = 'news/delete_article.html'
 from django.conf import settings
+
 @login_required(login_url=settings.LOGIN_URL)
 def create_article(request):
     if request.method == 'POST':
@@ -100,15 +100,13 @@ def create_article(request):
                 form.save_m2m() #сохраняем теги
                 for img in request.FILES.getlist('image_field'):
                     Image.objects.create(article=new_article, image=img, title=img.name)
-                return redirect("news_index")
+                return redirect("news")
     else:
         form = ArticleForm()
     return render(request,'news/create_article.html', {'form':form })
 
 from time import time
 def index(request):
-    t = time()
-    print(t)
     categories = Article.categories #создали перечень категорий
     author_list = User.objects.all() #создали перечень авторов
     if request.method == "POST":
@@ -124,9 +122,8 @@ def index(request):
         selected_author = 0
         selected_category = 0
         articles = Article.objects.all()
-
-    context = {'articles': articles, 'author_list':author_list, 'selected_author':selected_author,
-               'categories':categories,'selected_category': selected_category}
+        context = {'articles': articles, 'author_list': author_list, 'selected_author': selected_author,
+                   'categories': categories, 'selected_category': selected_category}
 
     return render(request,'news/news_list.html',context)
 

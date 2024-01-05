@@ -27,10 +27,13 @@ class PublishedToday(models.Manager):
     def get_queryset(self):
         return super(PublishedToday,self).get_queryset().filter(date__gte=datetime.date.today())
 
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 class Article(models.Model):
-    categories = (('E','Economics'),
-                  ('S','Science'),
-                  ('IT','IT'))
+    categories = (('E','Экономика'),
+                  ('N','Новости'),
+                  ('J','Жилье'),
+                  ('R','Разное'))
+
     #поля                           #models.CASCADE SET_DEFAULT
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField('Название',max_length=50,default='')
@@ -66,6 +69,11 @@ class Article(models.Model):
         else:
             return '(no image)'
 
+
+    def get_views(self):
+        return self.views.count()
+
+
     class Meta:
         ordering = ['title','date']
         verbose_name= 'Новость'
@@ -85,3 +93,15 @@ class Image(models.Model):
             return mark_safe(f'<img src="{self.image.url}" height="50px" width="auto" />')
         else:
             return '(no image)'
+
+class ViewCount(models.Model):
+    article = models.ForeignKey(Article,on_delete=models.CASCADE, related_name='views')
+    ip_address = models.GenericIPAddressField()
+    view_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=('-view_date',)
+        indexes = [models.Index(fields=['-view_date'])]
+
+    def __str__(self):
+        return self.article.title
