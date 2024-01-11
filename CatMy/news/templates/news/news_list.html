@@ -47,7 +47,7 @@
                                 </option>
                                 {% endfor %}
                             </select>
-                            <input type="submit" class="btn btn-success" value="Применить">
+                            <input type="submit" class="btn btn-outline-secondary" value="Применить">
                         </div>
             </form>
         </label>
@@ -57,14 +57,19 @@
     <div class="row">
         {% for article in articles %}
             <div class="single_news">
-            <div class="p-4 p-md-5">
+            <div class="p-4 p-md-5 text-white rounded" style="background:#4B0082;">
                 <div class="row">
                     <div class="col-md-{% if article.image_set.all %}6{% else %}12 {% endif %} px-0">
-                        <h1 class="display-4 fst-italic"> {{ article.title }}</h1>
+                        <h1 class="display-4 fst-italic text-white"> {{ article.title }}</h1>
+                        <hr>
                         <p class="lead my-3">{{ article.anouncement }}</p>
-                        <p class="lead mb-0"><a href="{% url 'news_detail' article.pk %}" class="fw-bold text-dark">Открыть новость
+                        <p class="lead mb-0"><a href="{% url 'news_detail' article.pk %}" class="fw-bold text-white"> Открыть новость
                         </a>
                         </p>
+                        <br>
+                        <p><small> Просмотры: {{ article.get_views }} </small></p>
+                        <br><br>
+                        <a class="btn btn-outline-secondary" href="{% url 'favorites' article.pk %}"><i class="fa fa-paw text-white"> Избранное </i></a>
                     </div>
                     {% if article.image_set.all %}
                     <div class="col-md-6 px-0">
@@ -81,6 +86,28 @@
             </div>
         </div>
         {% endfor %}
+    </div>
+    <br>
+    <!--    ниже пагинатор -->
+
+    <div class="row">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+              {% if articles.has_previous %}
+                <li class="page-item"><a class="page-link" style="color:purple;" href="?page={{ articles.previous_page_number }}"><i class="fa fa-paw"></i> Предыдущая </a></li>
+              {% endif %}
+              {% for p in articles.paginator.page_range %}
+                {% if articles.number == p %}
+                    <li class="page-item active" ><p class="page-link" style="color:black;background-color:purple;border: solid 1px purple;"> {{ p }}</p></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" style="color:purple;" href="?page={{ p }}"> {{ p }}</a></li>
+                {% endif %}
+              {% endfor %}
+              {% if articles.has_next %}
+                <li class="page-item"><a class="page-link" style="color:purple;" href="?page={{ articles.next_page_number }}"><i class="fa fa-paw"></i> Следующая </a></li>
+              {% endif %}
+          </ul>
+        </nav>
     </div>
 </div>
 {% endblock %}

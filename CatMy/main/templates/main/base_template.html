@@ -14,23 +14,25 @@
 
 </head>
 <body>
-{% block sidebar %} {% include 'main/sidebar.html' %} {% endblock %}
-<div class="container" >
-    <div class="row">
-        <h1> CatNews - все самое интересное из мира котиков </h1>
+
+
+<div class="row" style="height: 100vh;">
+    <div class="col-sm-3">
+        <div class="sticky-top">
+            {% block sidebar %} {% include 'main/sidebar.html' %} {% endblock %}
+        </div>
     </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-10">
+    <div class="col-sm-9">
+        <div class="text-center">
+            <h1>CatNews - все самое интересное из мира котиков</h1>
+        </div>
+        <hr>
     {% block content %}
         <div class="row">
             <div class="single_news">
-                <div class="p-4 p-md-5 text-white rounded bg-light">
+                <div class="p-4 p-md-5 text-Indigo rounded">
                     <div class="col-md-6 px-0">
-                        <h1 class="display-4 fst-italic">Главная котоновость этой недели:</h1>
-                        <p class="lead my-3">.......</p>
-                        <p class="lead mb-0"><a href="#" class="text-muted fw-bold">Полный текст...</a></p>
+                        <h1 class="display-4 fst-italic">Последняя новость</h1>
                     </div>
                 </div>
             </div>
@@ -38,11 +40,10 @@
     {% endblock %}
     </div>
 </div>
+
 <div class="row">
     {% block foot %}
     {% endblock %}
 </div>
-
-
 </body>
 </html>

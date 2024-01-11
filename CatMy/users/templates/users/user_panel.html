@@ -67,7 +67,7 @@
 
            {% if request.user.id %}  <!-- проверяем аутентификацию-->
                 <div class="dropdown flex-column mb-auto" >
-                  <button class="btn btn-primary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#8A2BE2;">
+                  <button class="btn btn-outline-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#8A2BE2;">
                     <img src="{{ request.user.account.account_image.url }}" alt="" width="25" height="25" class="rounded me-2">
                       <div class="d-none d-lg-block "> {{ request.user.username }} </div>
                   </button>

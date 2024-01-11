@@ -20,7 +20,7 @@
                         </option>
                         {% endfor %}
                     </select>
-                    <input type="submit" class="btn btn-success" value="Применить">
+                    <input type="submit" class="btn btn-outline-secondary" value="Применить">
                 </div>
             </form>
         </label>
@@ -58,7 +58,7 @@
                         <p class="lead my-3">{{ article.anouncement }}</p>
                         <p class="lead mb-0"><a href="{% url 'news_detail' article.pk %}" class="text-white fw-bold">Полный текст..</a></p>
                         <p><small>Просмотры: {{ article.get_views }}</small></p>
-                        <a class="btn btn-success" href="{% url 'favorites' article.pk %}"><i class="fa fa-bookmark">В избранное</i></a>
+                        <a class="btn btn-outline-secondary" href="{% url 'favorites' article.pk %}"><i class="fa fa-bookmark">В избранное</i></a>
                     </div>
                     {% if article.image_set.all %}
                     <div class="col-md-6 px-0">

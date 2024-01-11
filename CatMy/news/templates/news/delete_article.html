@@ -10,8 +10,8 @@
             <h1 >Удалить статью: {{ article.title }}?</h1>
             <form method="post" class="contact_form">
                 {% csrf_token %}
-                <a class="btn btn-warning" href="{% url 'news' %}"> Отмена </a>
-                <input type="submit" class="btn btn-danger" value = "Удалить">
+                <a class="btn btn-outline-secondary" href="{% url 'news' %}"> Отмена </a>
+                <input type="submit" class="btn btn-outline-secondary" value = "Удалить">
             </form>
             </div>
 

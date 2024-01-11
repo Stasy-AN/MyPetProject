@@ -21,16 +21,16 @@
 
 <div class="row" >
     <div class="single_news">
-        <div class="p-4 p-md-5" >
+        <div class="p-4 p-md-5 text-white rounded" style="background:#4B0082;"" >
             <div class="col-md-11 px-0">
                 <h1 class="display-4 fst-italic"> {{ article.title }}</h1>
                 {% if article.image_set.all %}
                 <div id="carouselControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox" style=" width:auto; height: 300px; !important;">
+                    <div class="carousel-inner" role="listbox" style=" width:auto; height: 500px; !important;">
                         {% for image in article.image_set.all %}
                         <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
                             <img class="d-block" src="{{ image.image.url }}"
-                                 style="margin:auto; height:300px; width:auto; border-radius:5px;">
+                                 style="margin:auto; height:500px; width:auto; border-radius:5px;">
                         </div>
                         {% endfor %}
                     </div>
@@ -44,16 +44,20 @@
                     </a>
                 </div>
                 {% endif%}
-                <p class="lead my-5">{{ article.anouncement }}</p>
                 <p class="lead my-2">{{ article.text }}</p>
                 <br><br>
-                <p> Автор: {{ article.author }} </p>
-                <!-- <p> Автор: {{ article.author }} : {{request.user.id}} : {{article.author.id}} </p>-->
-                <p class="lead my-3">Теги: {% for t in article.tags.all %} {{ t.title }} {% endfor %}</p>
+                <h6>   Автор: {{ article.author }} </h6>
+                <h6>   Дата публикации: {{ article.date }} </h6>
+                <br><br>
+                <h6>   Теги: {% for t in article.tags.all %} {{ t.title }} {% endfor %} </h6>
+                <br>
+                <a class="btn btn-outline-secondary" href="{% url 'favorites' article.pk %}"><i class="fa fa-paw text-white"> Избранное </i></a>
+                <br>
             </div>
+            <br>
             {% if request.user.id == article.author.id %}
-            <a class="btn btn-warning" href="{% url 'news_delete' article.pk %}">Удалить</a>
-            <a class="btn btn-primary" href="{% url 'news_update' article.pk %}">Редактировать</a>
+            <a class="btn btn-outline-secondary" href="{% url 'news_delete' article.pk %}">Удалить</a>
+            <a class="btn btn-outline-secondary" href="{% url 'news_update' article.pk %}">Редактировать</a>
             {% endif %}
 
         </div>

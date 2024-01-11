@@ -2,6 +2,8 @@
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load users_extras %}
+{% load i18n %}
 <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 <script src="https://kit.fontawesome.com/a97047fead.js" crossorigin="anonymous"></script>
 <meta charset="utf-8">
@@ -15,14 +17,16 @@
     background-image: url({% static 'main/img/Фон.png' %});
     background-repeat: no-repeat;
     background-size: cover;
+    position: fixed;
     }
     .one {
-    background: #290033;
+    background: #4B0082;
     }
 </style>
 
 
 <aside>
+    <div class="page-header text-center">
     <div class="one">
         <div class="d-flex flex-column flex-shrink-0 p-3">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -32,40 +36,43 @@
             <div class="d-none d-lg-block"> <h7> Главные новости котовселенной </h7> </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="{% url 'home' %}" {% if request.resolver_match.view_name  == 'home' %} class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Главная </div>
+               <li class="nav-item bg-white">
+                    <a href="{% url 'home' %}" {% if request.resolver_match.view_name  == 'home' %} class="link" aria-current="page" {% endif %}>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Главная </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item bg-white">
                     <a href="{% url 'news' %}" {% if request.resolver_match.view_name  == 'news' %} class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Все новости</div>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Все новости</div>
                     </a>
                 </li>
 
-                <li>
+                <li class="nav-item bg-white">
                     <a href="{% url 'cats' %}" {% if request.resolver_match.view_name  == 'cats' %} class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  О нас </div>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  О нас </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item bg-white">
                     <a href="/admin/" {% if request.path  == '/admin/' %} class= "link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Котоадмин </div>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Котоадмин </div>
                     </a>
                 </li>
             </ul>
             <hr>
 
             {% if request.user.id %}  <!-- проверяем аутентификацию-->
-            <div class="dropdown flex-column mb-auto" >
-                <button class="btn btn-primary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#212529;">
-                    <img src="{{ request.user.account.account_image.url }}" alt="" width="25" height="25" class="rounded-circle me-2">
-                    <div class="d-none d-lg-block "> {{ request.user.username }} </div>
+            <div class="dropdown flex-column mb-auto">
+                <button class="btn btn-outline-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#4B0082;">
+                    <img src="{{ request.user.account.account_image.url }}" alt="" width="25" height="25" >
+                    <div class="mx-auto"> <h6> {{ request.user.username }} </h6></div>
                 </button>
                 <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{% url 'create_article' %}"> Создать статью</a></li>
+                    {% if request.user|has_group:"Authors" %}
+                        <li><a class="dropdown-item" href="{% url 'create_article' %}"> Создать статью</a></li>
+                    {% endif %}
+                    <li><a class="dropdown-item" href="{% url 'my_favorites_list' %}"> Избранное</a></li>
                     <li><a class="dropdown-item" href="{% url 'profile' %}"> Мой аккаунт</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'logout' %}"> Выход</a></li>
@@ -73,15 +80,15 @@
             </div> <!-- выпадающее меню-->
             {% else %} <!-- ссылки на регистрацию и аутентификацию-->
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+                <li class="nav-item bg-white">
                     <a href="{% url 'registration' %}" {% if request.resolver_match.view_name  == 'registration' %} class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"><i class="fa fa-paw"></i> Регистрация</div>
+                    <div class="d-none d-lg-block"  style="color:indigo;"><i class="fa fa-paw"></i> Регистрация</div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-white">
                     <a href="{% url 'login' %}" {% if request.resolver_match.view_name  == 'login' %}
                     class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>
+                    <div class="d-none d-lg-block"  style="color:indigo;"> <i class="fa fa-paw"></i>
                         <i class="{% if request.path  == '/users/login' %} link-active {% endif %}"></i> Вход </div>
                     </a>
                 </li>
@@ -96,12 +103,16 @@
                 {% endfor %}
             {% endif %}
         <hr>
-
         <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
-        <input type="text" class="form-control border-0" placeholder="Поиск">
-        <div class="input-group-append">
-            <button class="btn btn-primary"><i class="fa fa-paw"></i></button>
+            <form action="{% url 'search' %}" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input id="search_input" name="search_input" type="text" class="form-control border-0" placeholder="Поиск">
+                    <button class="btn btn-outline-secondary"><i class="fa fa-paw text-white"></i></button>
+                </div>
+            </form>
         </div>
         </div>
+    </div>
     </div>
 </aside>

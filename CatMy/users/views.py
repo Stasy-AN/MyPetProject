@@ -1,10 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from .forms import *
 
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
 
 def profile(request):
@@ -31,7 +32,6 @@ def add_to_favorites(request, id):
         bookmark = FavoriteArticle.objects.create(user=request.user, article=article)
         messages.success(request,f"Новость {article.title} добавлена в закладки")
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
 
 def profile_update(request):
     user = request.user
@@ -92,7 +92,7 @@ def registration(request):
                 group = Group.objects.get(name='Actions Required')
                 user.groups.add(group)
             else:
-                group = Group.objects.get(name='Reader')
+                group = Group.objects.get(name='reader')
                 user.groups.add(group)
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')

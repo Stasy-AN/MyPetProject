@@ -32,10 +32,10 @@ class ArticleForm(ModelForm):
 
     class Meta:
         model = Article
-        fields = ['title','anouncement','text','tags','author']
+        fields = ['title','anouncement','text','tags']
         widgets = {
             'anouncement': Textarea(attrs={'cols':80,'rows':2}),
             'text': Textarea(attrs={'cols': 80, 'rows': 2}),
             'tags': CheckboxSelectMultiple(),
-            'author': Select()
+
         }
