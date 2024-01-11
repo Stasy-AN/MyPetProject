@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from news.models import Article
 from users.models import User
-from wheel.metadata import _
+
 
 
 def index (request):
