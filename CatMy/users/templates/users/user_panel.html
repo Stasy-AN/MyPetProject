@@ -17,9 +17,10 @@
     background-image: url({% static 'main/img/Фон.png' %});
     background-repeat: no-repeat;
     background-size: cover;
+    position: fixed;
     }
     .one {
-    background: #290033;
+    background: #4B0082;
     }
 </style>
 
@@ -34,44 +35,54 @@
             <div class="d-none d-lg-block"> <h7> Главные новости котовселенной </h7> </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+                <li class="nav-item bg-white">
                     <a href="{% url 'home' %}" {% if request.resolver_match.view_name  == 'home' %} class="link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Главная </div>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Главная </div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-white">
+                    <a href="{% url 'news' %}" {% if request.resolver_match.view_name  == 'news' %} class="link-active" aria-current="page" {% endif %}>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Все новости</div>
+                    </a>
+                </li>
+                <li class="nav-item bg-white">
                     <a href="/admin/" {% if request.path  == '/admin/' %} class= "link-active" aria-current="page" {% endif %}>
-                    <div class="d-none d-lg-block"> <i class="fa fa-paw"></i>  Котоадмин  </div>
+                    <div class="d-none d-lg-block" style="color:indigo;"> <i class="fa fa-paw"></i>  Котоадмин  </div>
                     </a>
                 </li>
             </ul>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-              <li class="nav-item">
+              <li class="nav-item bg-white">
                  <a href="{% url 'profile' %}" {% if request.resolver_match.view_name  == 'news' %} class="link-active" aria-current="page" {% endif %}>
-                     <div class="d-none d-lg-block"><i class="fa fa-paw"></i> Мой профиль</div>
+                     <div class="d-none d-lg-block" style="color:indigo;"><i class="fa fa-paw"></i> Мой профиль</div>
                 </a>
               </li>
-              <li>
-                <a href="#" {% if request.path  == '/myarticles/' %} class="link-active" aria-current="page" {% endif %}>
-                  <div class="d-none d-lg-block"><i class="fa fa-paw"></i> Мои статьи</div>
+              <li class="nav-item bg-white">
+                <a href="{% url 'my_favorites_list' %}" {% if request.path  == 'my_favorites_list' %} class="link-active" aria-current="page" {% endif %}>
+                  <div class="d-none d-lg-block" style="color:indigo;"><i class="fa fa-paw"></i> Избранное</div>
                 </a>
               </li>
-              <li>
+              <li class="nav-item bg-white">
+                <a href="{% url 'create_article' %}" {% if request.path  == 'create_article' %} class="link-active" aria-current="page" {% endif %}>
+                  <div class="d-none d-lg-block" style="color:indigo;"><i class="fa fa-paw"></i> Создать статью</div>
+                </a>
+              </li>
+              <li class="nav-item bg-white">
                 <a href="{% url 'logout' %}"  aria-current="page">
-                    <div class="d-none d-lg-block"><i class="fa fa-paw"></i> Выход из аккаунта</div>
+                    <div class="d-none d-lg-block" style="color:indigo;"><i class="fa fa-paw"></i> Выход из аккаунта</div>
                 </a>
               </li>
             </ul>
             <hr>
 
            {% if request.user.id %}  <!-- проверяем аутентификацию-->
-                <div class="dropdown flex-column mb-auto" >
-                  <button class="btn btn-outline-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#8A2BE2;">
-                    <img src="{{ request.user.account.account_image.url }}" alt="" width="25" height="25" class="rounded me-2">
-                      <div class="d-none d-lg-block "> {{ request.user.username }} </div>
-                  </button>
-                  <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+            <div class="dropdown flex-column mb-auto">
+                <button class="btn btn-outline-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#4B0082;">
+                    <img src="{{ request.user.account.account_image.url }}" alt="" width="25" height="25" >
+                    <div class="mx-auto"> <h6> {{ request.user.username }} </h6></div>
+                </button>
+                <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="{% url 'create_article' %}"> Создать статью</a></li>
                     <li><a class="dropdown-item" href="{% url 'profile' %}"> Мой аккаунт</a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -86,7 +97,7 @@
                               <div class="d-none d-lg-block">Регистрация</div>
                           </a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item bg-white">
                           <a href="{% url 'login' %}" {% if request.resolver_match.view_name  == 'login' %}
                           class="link-active" aria-current="page" {% endif %}>
                               <i class="fa fa-sign menu-icon {% if request.path  == '/users/login' %}
